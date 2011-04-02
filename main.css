@@ -5,6 +5,18 @@ body {
   font-family: "Optima", "Nu Sans", "Arial", sans-serif;
 }
 
+a:link {
+	color: #005585;
+}
+
+a:visited {
+	color: #485270;
+}
+
+a:hover {
+	color: #b83800;
+}
+
 h1 {
   font-size: 50px;
 }
