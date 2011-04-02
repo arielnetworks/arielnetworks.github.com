@@ -23,6 +23,13 @@ blockquote {
   padding: 10px 20px;
 }
 
+pre {
+  padding: 8px;
+  background-color: #eee;
+  line-height: normal;
+  white-space: pre-wrap;
+}
+
 dl {
   margin-left: 20px;
 }

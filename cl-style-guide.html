@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Common Lisp Style Guide - Ariel Labs</title>
+  <link rel="stylesheet" href="./main.css" type="text/css" media="screen, tv, print" charset="UTF-8" />
+</head>
+<body>
+<h1>Ariel Labs<br />Common Lisp Style Guide</h1>
+
+<p>
+This is just a draft.
+</p>
+
+<h2>Package</h2>
+
+<h3>One package per one file</h3>
+
+<p>
+Strangely enough, in case of legacy CL programs, their packages are declared in one file (maybe named "package.lisp"). In other hand, we recommend to declare each packages in each files.
+</p>
+
+<pre>
+(in-package :cl-user)
+(defpackage style-guide.core
+  (:use :cl))
+(in-package :style-guide.core)
+
+;; body
+</pre>
+
+<p>
+This keeps a program to be loosely coupled.
+</p>
+
+<h3>Avoid :use</h3>
+
+<p>
+Don't use <code>:use</code> unnecessarily. It is often hard to understand where a function came from. <code>:import-from</code> is available for instead.
+</p>
+
+<pre>
+(in-package :cl-user)
+(defpackage style-guide.core
+  (:use :cl)
+  (:import-from :style-guide.util
+                :funky-feature))
+(in-package :style-guide.core)
+</pre>
+
+<p>
+We allow you to use <code>:use</code> only if most of symbols are needed or it is obvious.
+</p>
+
+<pre>
+(in-package :cl-user)
+(defpackage style-guide.core
+  (:use :cl
+        :anaphora)
+  (:import-from :style-guide.util
+                :funky-feature))
+(in-package :style-guide.core)
+</pre>
+
+<h2>Annotation</h2>
+
+<h3>Use "cl-annot"</h3>
+
+<p>
+You know <a href="https://github.com/arielnetworks/cl-annot">cl-annot</a> is an useful library to make a program to be readable. We recommend you to use it positively.
+</p>
+
+<pre>
+@export
+(defun plus-ten (x)
+  (+ x 10))
+</pre>
+
+<h2>Naming</h2>
+
+<h3>Surround class name with "&lt;" and "&gt;"</h3>
+
+<pre>
+(defclass &lt;aluminium&gt; (&lt;metal&gt;)
+    (color solidity cost))
+</pre>
+
+<h3>Surround constants with "+"</h3>
+
+<pre>
+(defconstant +kikuko-inoue-age+ 17)
+</pre>
+
+<h3>Surround special vars with "*"</h3>
+
+<pre>
+(defvar *cache-table* (make-hash-table))
+(defparameter *debug* t)
+</pre>
+
+<h3>Hierarchical Package Name</h3>
+
+<pre>
+;; in core.lisp
+(in-package :cl-user)
+(defpackage style-guide.core
+  (:use :cl))
+(in-package :style-guide.core)
+
+;; in util.lisp
+(in-package :cl-user)
+(defpackage style-guide.util
+  (:use :cl))
+(in-package :style-guide.util)
+
+;; in class/metal.lisp
+(in-package :cl-user)
+(defpackage style-guide.class.metal
+  (:use :cl))
+(in-package :style-guide.class.metal)
+</pre>
+
+<h2>Comment</h2>
+
+<h3>Comments are Optional</h3>
+
+<p>
+All comments are optional. Usually, comments are for writer of the program and it is you in most of the times. If you think that it should be known by users, it must be included in docstring, not comment.
+</p>
+
+<h3>Comments should end with period</h3>
+
+<p>
+This is just a rule.
+</p>
+
+<pre>
+;; TODO: rewrite to recursive at tail position.
+(defun factorial (n)
+  (if (<= n 1)
+    1
+    (* n (factorial (1- n))))))
+</pre>
+
+<h2>Docstring</h2>
+
+<h3>Required (almost always)</h3>
+
+<p>
+Docstring is always needed for every parts. Don't forget Packages and ASDF Systems.
+</p>
+
+<p>
+You can omit only if it is obvious what to do.
+</p>
+
+<h2>Class</h2>
+
+<h3>Add :type to each slots</h3>
+
+<pre>
+(defclass &lt;aluminium&gt; (&lt;metal&gt;)
+    ((color :type string
+            :initarg :color
+            :initform "white")
+     (solidity :type (or integer &lt;solidity&gt;)
+               :initarg :solidity
+               :initform (make-instance '&lt;solidity&gt;))
+     (cost :type (or integer null)
+           :initarg :cost))
+  (:documentation "A class represents Aluminium."))
+</pre>
+
+<p>
+Don't forget a type "null" for optional slots.
+</p>
+
+<h2>Macro</h2>
+
+<h3>Avoid Macros in really meaning</h3>
+
+<p>
+You know Macro is a string feature of Lisp. But it is also a dangerous thing. You should avoid using Macro if it is possible.
+</p>
+
+<h2>Conditional Flow</h2>
+
+<h3>Don't nest "if"</h3>
+
+<p>
+However "if" is a simple feature and most of languages have it, it could make a program hard to understand.
+</p>
+
+<p>
+A large <code>typecase</code> may be rewritten with <code>defmethod</code> or Polymorphism.
+</p>
+
+<div id="footer">
+&copy; Copyright 2011 Ariel Labs.
+</div>
+
+</body>
+</html>
