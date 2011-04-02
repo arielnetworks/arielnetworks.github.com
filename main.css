@@ -17,6 +17,12 @@ a:hover {
 	color: #b83800;
 }
 
+blockquote {
+  font-style: italic;
+  background: url('img/quote.png') no-repeat no-repeat;
+  padding: 10px 20px;
+}
+
 h1 {
   font-size: 50px;
 }
