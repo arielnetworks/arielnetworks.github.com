@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-  margin: 30px 150px;
+  margin: 20px 150px;
   font-family: "Optima", "Nu Sans", "Arial", sans-serif;
 }
 
@@ -35,7 +35,11 @@ dl {
 }
 
 h1 {
-  font-size: 50px;
+  background: transparent url('img/logo.png') 0 0 no-repeat;
+  height: 99px;
+  width: 300px;
+  overflow: hidden;
+  text-indent: -9999px;
 }
 
 #catch-copy {
