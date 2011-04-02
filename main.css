@@ -40,12 +40,14 @@ h1 {
   width: 300px;
   overflow: hidden;
   text-indent: -9999px;
+  margin: 0;
 }
 
 #catch-copy {
   text-align: center;
   font-size: 30px;
   font-style: italic;
+  margin: 15px 0;
 }
 
 .member img {
