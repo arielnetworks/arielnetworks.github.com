@@ -70,3 +70,9 @@ dl {
   padding-top: 15px;
   border-top: 1px black solid;
 }
+
+.copyright .small-logo {
+  height: 30px;
+  width: 100px;
+  vertical-align: bottom;
+}
