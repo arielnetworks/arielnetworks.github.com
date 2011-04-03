@@ -36,7 +36,6 @@ dl {
 
 #header {
   font-size: 40px;
-  font-weight: bold;
 }
 
 #header h1 {
@@ -52,6 +51,7 @@ dl {
   text-indent: 0;
   position: absolute;
   font-size: 50px;
+  font-weight: bold;
 }
 
 #catch-copy {
