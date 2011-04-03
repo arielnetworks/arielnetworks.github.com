@@ -34,13 +34,24 @@ dl {
   margin-left: 20px;
 }
 
-h1 {
+#header {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#header h1 {
   background: transparent url('img/logo.png') 0 0 no-repeat;
   height: 99px;
   width: 300px;
   overflow: hidden;
   text-indent: -9999px;
   margin: 0;
+}
+
+#header h1 .title {
+  text-indent: 0;
+  position: absolute;
+  font-size: 50px;
 }
 
 #catch-copy {
