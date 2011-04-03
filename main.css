@@ -39,18 +39,18 @@ dl {
 }
 
 #header h1 {
-  background: transparent url('img/logo.png') 0 0 no-repeat;
-  height: 99px;
-  width: 300px;
-  overflow: hidden;
-  text-indent: -9999px;
   margin: 0;
+  padding: 0;
+  height: 89px;
+}
+
+#header h1 img {
+  height: 89px;
+  width: 290px;
 }
 
 #header h1 .title {
-  text-indent: 0;
-  position: absolute;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
 }
 
