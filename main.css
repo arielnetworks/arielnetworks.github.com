@@ -76,3 +76,25 @@ dl {
   width: 100px;
   vertical-align: bottom;
 }
+
+table {
+	margin: 0 20px 0.5em 20px;
+	border: 1px solid #aaa;
+	background-color: #eee;
+  font-size: small;
+}
+
+th,
+td {
+	padding: 0 10px;
+}
+
+th {
+	color: #fff;
+	background-color: #999;
+}
+
+td {
+	border: 1px solid #ddd;
+	background-color: #fff;
+}
