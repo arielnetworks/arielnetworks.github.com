@@ -2,7 +2,7 @@
 
 body {
   margin: 20px 150px;
-  font-family: "Optima", "Nu Sans", "Arial", sans-serif;
+  font-family: "Optima", "Nu Sans", Baskerville, "Times New Roman", "Arial", sans-serif;
 }
 
 a:link {
