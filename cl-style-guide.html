@@ -187,20 +187,72 @@ Don't forget a type "null" for optional slots.
 <h3>Avoid Macros in really meaning</h3>
 
 <p>
-You know Macro is a string feature of Lisp. But it is also a dangerous thing. You should avoid using Macro if it is possible.
+You know Macro is a strong feature of Lisp. But it is also a dangerous thing. You should avoid using Macro if it is possible.
+</p>
+
+<p>
+This is a really important warning. If you feel it is needed once, you should think this again. <strong>How do other languages manage it?</strong>
 </p>
 
 <h2>Conditional Flow</h2>
 
-<h3>Don't nest "if"</h3>
+<h3>Use WHEN, UNLESS if possible</h3>
+
+<h3>Use ETYPECASE, ECASE if possible</h3>
+
+<h3>Don't nest conditional flow</h3>
 
 <p>
 However "if" is a simple feature and most of languages have it, it could make a program hard to understand.
 </p>
 
+<pre>
+;; Hard to understand
+(defun count-all-numbers (alist)
+  (if (null alist)
+    0
+    (+ (if (listp (first alist))
+         (count-all-numbers (first alist))
+         (if (numberp (first alist)) 1 0))
+       (count-all-numbers (rest alist)))))
+</pre>
+
+<p>
+Above example should be rewritten as following.
+</p>
+
+<pre>
+;; quoted from "Good Lisp Style"
+(defun count-all-numbers (exp)
+  (typecase exp
+    (cons   (+ (count-all-numbers (first exp))
+               (count-all-numbers (rest exp))))
+    (number 1)
+    (t      0)))
+</pre>
+
 <p>
 A large <code>typecase</code> may be rewritten with <code>defmethod</code> or Polymorphism.
 </p>
+
+<h3>Keep the condition expression short</h3>
+
+<pre>
+(if (and (person-name user)
+         (&lt;= 20 (person-age user)))
+  (write-line "this person is valid.")
+  (error "Invalid person."))
+</pre>
+
+<pre>
+(defmethod valid-person-p ((person &lt;person&gt;))
+  (and (person-name person)
+       (&lt;= 20 (person-age person))))
+
+(if (valid-person-p person)
+  (write-line "this person is valid.")
+  (error "Invalid person."))
+</pre>
 
 <div id="footer">
   <div class="copyright">&copy; Copyright 2011 <img src="img/logo-100x30.png" class="small-logo" alt="Ariel Labs" /></div>
