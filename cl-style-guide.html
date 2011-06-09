@@ -231,12 +231,20 @@ For example, it is often used that defines something specialized type (like "def
 
 <h3>Use WHEN, UNLESS if possible</h3>
 
+<p>
+Don't use <code>if</code> without "else" expression. <code>when</code> is more precise for it.
+</p>
+
 <h3>Use ETYPECASE, ECASE if possible</h3>
+
+<p>
+<code>etypecase</code> and <code>ecase</code> are a strict version of <code>typecase</code> and <code>case</code>. If you don't expect other types specified, you should use <code>etypecase</code> or <code>ecase</code> for safety.
+</p>
 
 <h3>Don't nest conditional flow</h3>
 
 <p>
-However "if" is a simple feature and most of languages have it, it could make a program hard to understand.
+However <code>if</code> is a simple feature and most of languages have it, it could make a program hard to understand.
 </p>
 
 <pre>
@@ -269,6 +277,10 @@ A large <code>typecase</code> may be rewritten with <code>defmethod</code> or Po
 </p>
 
 <h3>Keep the condition expression short</h3>
+
+<p>
+Large condition expressions makes the codes hard to read. If you felt the condition will be larger, you should separate them into another function or method.
+</p>
 
 <pre>
 (if (and (person-name user)
