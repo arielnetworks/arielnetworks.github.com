@@ -27,6 +27,10 @@ This is just a draft.
 Strangely enough, in case of legacy CL programs, their packages are declared in one file (maybe named "package.lisp"). In other hand, we recommend to declare each packages in each files.
 </p>
 
+<p>
+You should always put like following code at the top of each Lisp files.
+</p>
+
 <pre>
 (in-package :cl-user)
 (defpackage style-guide.core
@@ -37,13 +41,13 @@ Strangely enough, in case of legacy CL programs, their packages are declared in 
 </pre>
 
 <p>
-This keeps a program to be loosely coupled.
+If you adopt this style on your programs, you will notice you think about dependence of each components. It is a good signal. This style keeps a program to be loosely coupled.
 </p>
 
 <h3>Avoid :use</h3>
 
 <p>
-Don't use <code>:use</code> unnecessarily. It is often hard to understand where a function came from. <code>:import-from</code> is available for instead.
+Don't use <code>:use</code> unnecessarily. It is often hard to understand where a function came from. We recommend using <code>:import-from</code> for instead.
 </p>
 
 <pre>
@@ -69,12 +73,17 @@ We allow you to use <code>:use</code> only if most of symbols are needed or it i
 (in-package :style-guide.core)
 </pre>
 
-<h2>Annotation</h2>
-
-<h3>Use "cl-annot"</h3>
 
 <p>
-You know <a href="https://github.com/arielnetworks/cl-annot">cl-annot</a> is an useful library to make a program to be readable. We recommend you to use it positively.
+Why we recommend such a complicated rule is from our thoughts. We think codes are also documents, and furthermore if we say, they are also novels. If we say from the point, importing symbols are introducing characters. We think it might help readers.
+</p>
+
+<h2>Annotation</h2>
+
+<h3>Use "cl-annot" positively</h3>
+
+<p>
+Though "Annotation" is not supported in Common Lisp, "<a href="https://github.com/arielnetworks/cl-annot">cl-annot</a>" provides the feature. We recommend using it almost always. For example, "@export" annotation means exporting the following function or something.
 </p>
 
 <pre>
@@ -82,6 +91,26 @@ You know <a href="https://github.com/arielnetworks/cl-annot">cl-annot</a> is an 
 (defun plus-ten (x)
   (+ x 10))
 </pre>
+
+<p>
+If you want to know the truth, that is just a macro actually. So, you can say that just a shorthand. Of course, you can define your own annotations.
+</p>
+
+<p>
+Why we recommend such an ugly syntax? Because it provides transparency to our code.
+</p>
+
+<p>
+For example, <code>defwidget</code> is one of macros in <a href="http://common-lisp.net/project/cl-weblocks/">Weblocks</a>. It is just a <code>defclass</code>, actually. Well, really? You have to expand the macro to know that. It is not transparent.
+</p>
+
+<p>
+If I write Weblocks from scratch now, I will provide "@widget" annotation, for instead of <code>defwidget</code>. You can use familiar <code>defclass</code> to define a widget. It makes you be relieved.
+</p>
+
+<p>
+In that way, we can represent the will we won't disturb your code by using annotations. This is another expression we can use.
+</p>
 
 <h2>Naming</h2>
 
@@ -187,15 +216,15 @@ Don't forget a type "null" for optional slots.
 <h3>Avoid Macros in really meaning</h3>
 
 <p>
-You know Macro is one of the strongest feature of Lisp. But it is also a dangerous thing. You should avoid using Macro if it is possible.
+You know Macro is one of the strongest feature in Common Lisp. But it is also a dangerous thing. You should avoid using Macro if it is possible.
 </p>
 
 <p>
-This is a really important warning. If you feel it is needed once, you should think this well again. <strong>How do other languages manage it?</strong>
+This is a really important warning. If you feel it is needed once, you should think this well again. <strong>How do other languages manage it?</strong> They really manage the problems without macros.
 </p>
 
 <p>
-For example, it is often used that defines something specialized type (like "defhoge").
+For example, it is often used that defines something specialized type (like "defwidget"). Must it be a macro, not an annotation? Why don't you use <code>defclass</code> for instead. There are more choices than you think. Macro is the last one to choose.
 </p>
 
 <h2>Conditional Flow</h2>
